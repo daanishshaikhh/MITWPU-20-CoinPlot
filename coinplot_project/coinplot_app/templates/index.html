@@ -1,0 +1,373 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../static/coinplot_app/css/style.css">
+	<link rel="stylesheet" href="../static/coinplot_app/css/footerstyles.css">
+	<link rel="icon" href="../static/coinplot_app/images/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Merriweather&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Playfair+Display&display=swap" rel="stylesheet">
+    <title>CoinPlot</title>
+
+</head>
+<body>
+<nav class="navbar">
+		<div class="navdiv" id="navbar">
+			<div class="logo">
+			<img src="../static/coinplot_app/images/logo.png" alt="CoinPlot Logo">
+			CoinPlot</a> 
+			</div>
+			<ul>
+				<li><a href="#header">About</a></li>
+				<li><a href="#converter">Converter</a></li>
+				<li><a href="#graph">Graph</a></li>
+			</ul>
+		</div>
+	</nav>
+ <hr class="separator" id="sept1">
+
+ <div class="container" id="header">
+    <h2>Welcome to our CoinPlot!</h2>
+    <hr class="separator" id="sept2">
+    <h2><em>About CoinPlot</em></h2 n>
+    <p>The Currency Exchange Rate Visualizer is a project designed to provide users with an intuitive and interactive way to explore and analyze exchange rates of various currencies against the US Dollar (USD). The goal is to empower users to gain insights into currency fluctuations and trends over time, facilitating informed decision-making for financial planning or international transactions.
+        Features:</p>
+        <br>
+         <h4> <em>1. Dynamic Currency Selection: </em></h4>
+         <br>
+         <p>->Users can select multiple currencies of interest, and the system dynamically fetches and plots their exchange rates against the USD</p>
+         <br>
+         <h4><em>2.	Historical Data Analysis:</em></h4>
+         <br>
+         <p>->The system allows users to view historical exchange rate data for a specified time range. 
+            By analyzing historical trends, users can identify patterns, fluctuations, and potential 
+            factors influencing currency movements.</p>
+        <br>
+        <h4><em>3.	Interactive Graphs:</em></h4>
+        <br>
+        <p>->The graphical representation includes interactive charts that allow users to zoom in/out
+            ,pan, and hover over data points to view detailed information.
+            This level of interactivity enhances the user experience and facilitates a deeper
+             understanding of currency movements.</p>
+
+    <h2><em>How to Use:</em></h2>
+    <p>1. Use the currency converter to convert amounts between currencies.</p>
+    <p>2. Choose a currency pair and chart type below.</p>
+    <p>3. Analyze the historical exchange rates with peak and lowest dates.</p>
+</div>
+
+<button id="goToTopBtn" onclick="goToTop()">Go to Top</button>
+
+    <div class="container" id="converter">
+    <div>
+        <h2>Currency Converter</h2>
+        <label for="amount">Enter Amount (USD): </label>
+        <input type="number" id="amt" placeholder="Enter amount in USD">
+		
+		<label for="currencyPair">Choose Currency Pair: </label>
+        <select id="currencyPair">
+        
+        </select>
+	
+        <label for="convertedAmount">Converted Amount: {{convertedAmount}}</label>
+        <span id="convertedAmount">0.00</span>
+
+        <button onclick="convertCurrency()">Convert</button>
+    </div>
+    </div>
+
+
+    <div class="container" id="graph">
+    <div>
+    <h2 class="graph1">Graphical Representation</h2>
+	
+	<div class="dropdown-container">
+        <label for="graphCurrencyPair">Select Currency:</label>
+        <select id="graphCurrencyPair"></select>
+    </div>
+
+    <div class="dropdown-container">
+        <label for="chartType">Select Chart Type:</label>
+        <select id="chartType">
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Yearly">Yearly</option>
+        </select>
+    </div>
+	
+	<div class="dropdown-container">
+        <button onclick="plotGraph()">Plot</button>
+    </div>
+    </div>
+    </div>
+
+    <div>
+    <div id="chart-container">
+        <!-- The plotly graph will be rendered here :
+        {% autoescape off %} -->
+        {{ graph_html }}
+        <!-- {% endautoescape %} -->
+    </div>
+
+    </div>
+
+<hr class="separator" id="sept3">
+
+ <footer class="footer">
+  	<div class="cont">
+  		<div class="row">
+  			<div class="footer-col">
+  				<h4>Quick Nav</h4>
+				<a href="#navbar">Go to top</a>
+  	 			<a href="#converter">Converter</a>
+				<a href="#graph">Graph</a>
+  	 		</div>
+
+  	 		<div class="footer-col2">
+  	 			<h4>follow us</h4>
+  	 			<div class="social-links">
+  	 				<a href="" target="_blank" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD30lEQVR4AayShW4cMRCGLQgzHArKDK9xor5KnyDMSZmZmZmZRWWuKMy8e3y7U8/KvXG6PlR+6dM3Wtv/tElYulnzHXI918HnvQZ7PNfgGfdvz1XQEJzFtz14B++y+crCO+D2XoG97ssw475swhwuGWSOK26T3zX24luWbZbehTxe1uS+YOiuCzGwOB+3mA2yAvcFU8cO7Mrsf30R3Lz4nfMcL+eglZyNkm3QGXZhJ0snzrOw3nE61uc4zQs4wmKOxC3PaIszZA4/I2On6zSsY8ni4P9Kx6loX/WJMCCOk5G47dCZ+r79HLtxR8LfueN45F318TDEORYiW4TJHBcvbf8QhT/TJoRiJkQME2bCJvRpJnwaM8TbuX24Q/k3wS82VR0JwRwOB8nSjF5xJgRvhgxIEtEj3kngLibHcQzc1YdDetWhICSj8iD5UW8MUsX+PoBGdNzJ/qXqQHBv5f4AVHCEBX4yp1LMG26EIJ2I+2hpFn18J8OsuQi5lXv9MxV7/ZAul35HIY0k7cCduJtV7tN95bt0sNgdt5g1sjR/GrX/+E9+j8DyI35xV7eh6q/cpftY2Q5tDwfSoVxYj5jwf5Yf4qV0j+bknXtY2bbZZxxIh9KtlkERfjaD52QFcgdSvl17xkq3zP4u3TwDSAlZAZ2pgmeZgrtZ6aZpraRrGpR0kuVZFTpXv1eBu1lpx5RW3DEFFu1kmWzSM21AiehC04wWc/uUxorbpn4XtU6CiuLWKcvZ5HVPxN7ZQkZwNytqnnxW1DwBSGETWSabnPsSkjuV4G5W2DC+hwPJyCZdL/22ngLJYt7DihonfAW1Y2BRR5bJJhtvaeL9OFoJ7mZrGiC3sHb8b6vlcdswFATRL2ZCDagAX12H+3DOOWe7A8d2fFQZlsRMXpzu6z8kVnGdPcDgDbRJ5InP/nFB3lFOTMlck1TVuW8gD8wzcRO3FeQfFvfeQUbeQU5M2K0yOGBJXlVjcmaO1HFTsernecPZTd/c3ZQ0CeTM7M+S3L0MNWbpT/a94abql7ebXDrburidECiZa5LsspZUZO+kzNI2Z31r9JPsmlx7M2namzHZG7J1vaQkp6qBff09csYN3FKS6jt5w1mPA2stos8sCb/b6zFzIPMcduOG+kzORjpurUaBtRKRuRwSsz8LqnpWQuaoV8MAu9V3VF/MG9Zi2DQXAxrwUlhSENeZA7aWwyY/+bc1tkKu/hOXxkLwZswHVLlTUlINNW0mjFnswC71W+FtGLOd+9ps+7k2qw/MtEmSrlNZB+c6z5jBrPo3nZNjzXQm1FTrjgSp6dYDakr3oFd9U+9y1lO9tTZT6gAAAABJRU5ErkJggg==" alt="facebook"></a>
+  	 				
+					<a href="" target="_blank"><img src="data:image/png;base64,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" alt="Instagram"><i class="fab fa-twitter"></i></a>
+  	 				
+					<a href="" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAAAAABWESUoAAAA3ElEQVR4Ac2SGQDFMBBE1ylOcYpTner0neK0TnGpU53iFKc6xWl+p+f25D7InZ295Cv0mGjFUOzWDVVVa/WykaBiaBBFfsiyory3JASRjs8mInqxUGRw47CIBIy7Ew0Sh0nED4OXCwkNh8h7GrrgCkVK9a7w6Q2BjoVa6Oo9EZEDVJ7I1M4UeMDXzIEhvoukFxNMaP8o4gpon1l9qnqc7DcPIgpd7Ce0t/fJVO0q0qIsVeuY1XwNYK1gwm8J2GAqvHRF5mD7BcG0Rl6yegjw0BqdakE8Bni0RyjyDf4Y1Y0n0wNT4wAAAABJRU5ErkJggg=="><i class="fab fa-twitter"></i></a>
+					
+  	 			</div>
+  	 		</div>
+  	 	</div>
+  	</div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+ 
+<script>
+    // Currency pairs data
+    var currencyPairsList = {
+        "Select Currency": "",
+        "Algerian Dinar": "DZD",
+        "Australian Dollar": "AUD",
+        "Bahraini Dinar": "BHD",
+        "Bolivar Fuerte": "VEF",
+        "Botswana Pula": "BWP",
+        "Brazilian Real": "BRL",
+        "Brunei Dollar": "BND",
+        "Canadian Dollar": "CAD",
+        "Chilean Peso": "CLP",
+        "Chinese Yuan": "CNY",
+        "Colombian Peso": "COP",
+        "Czech Koruna": "CZK",
+        "Danish Krone": "DKK",
+        "Euro": "EUR",
+        "Hungarian Forint": "HUF",
+        "Icelandic Krona": "ISK",
+        "Indian Rupee": "INR",
+        "Indonesian Rupiah": "IDR",
+        "Iranian Rial": "IRR",
+        "Israeli New Shekel": "ILS",
+        "Japanese Yen": "JPY",
+        "Kazakhstani Tenge": "KZT",
+        "Korean Won": "KRW",
+        "Kuwaiti Dinar": "KWD",
+        "Libyan Dinar": "LYD",
+        "Malaysian Ringgit": "MYR",
+        "Mauritian Rupee": "MUR",
+        "Mexican Peso": "MXN",
+        "Nepalese Rupee": "NPR",
+        "New Zealand Dollar": "NZD",
+        "Norwegian Krone": "NOK",
+        "Omani Rial": "OMR",
+        "Pakistani Rupee": "PKR",
+        "Peruvian Sol": "PEN",
+        "Philippine Peso": "PHP",
+        "Polish Zloty": "PLN",
+        "Qatari Riyal": "QAR",
+        "Russian Ruble": "RUB",
+        "Saudi Arabian Riyal": "SAR",
+        "Singapore Dollar": "SGD",
+        "South African Rand": "ZAR",
+        "Sri Lankan Rupee": "LKR",
+        "Swedish Krona": "SEK",
+        "Swiss Franc": "CHF",
+        "Thai Baht": "THB",
+        "Trinidadian Dollar": "TTD",
+        "Tunisian Dinar": "TND",
+        "U.A.E. Dirham": "AED",
+        "U.K. Pound": "GBP",
+        "U.S. Dollar": "USD",
+        "Uruguayan Peso": "UYU"
+    };
+
+    var exchangeRates = {
+    "DZD": 140.4196,
+    "AUD": 1.437401179,
+    "BHD": 0.38,
+    "VEF": 35.4,
+    "BWP": 12.7388535,
+    "BRL": 5.0897,
+    "BND": 1.3904,
+    "CAD": 1.2989,
+    "CLP": 910.03,
+    "CNY": 6.8613,
+    "COP": 4073.25,
+    "CZK": 24.615,
+    "DKK": 7.4327,
+    "EUR": 0.99930049,
+    "HUF": 350.43,
+    "ISK": 141.42,
+    "INR": 79.9097,
+    "IDR": 15628,
+    "IRR": 42262,
+    "ILS": 3.259,
+    "JPY": 136.72,
+    "KZT": 457.33,
+    "KRW": 1336.9,
+    "KWD": 0.31,
+    "LYD": 4.81,
+    "MYR": 4.4743,
+    "MUR": 44.3623,
+    "MXN": 19.9268,
+    "NPR": 133.18,
+    "NZD": 1.612903226,
+    "NOK": 9.6602,
+    "OMR": 0.38,
+    "PKR": 284.8,
+    "PEN": 3.73,
+    "PHP": 56.008,
+    "PLN": 4.7465,
+    "QAR": 3.64,
+    "RUB": 60.0924,
+    "SAR": 3.75,
+    "SGD": 1.3904,
+    "ZAR": 16.80035,
+    "LKR": 328.53,
+    "SEK": 10.6006,
+    "CHF": 0.9628,
+    "THB": 35.9,
+    "TTD": 6.7171,
+    "TND": 3.1,
+    "AED": 3.67,
+    "GBP": 0.844951415,
+    "USD": 1,
+    "UYU": 40.421,
+    "VES": 35.4
+    };
+
+    function convertCurrency() {
+        var amount = parseFloat(document.getElementById("amt").value);
+        var fromCurrency = "USD"; // Assuming the amount is always in USD
+        var toCurrency = document.getElementById("currencyPair").value;
+
+        if (isNaN(amount)) {
+            alert("Please enter a valid number.");
+            return;
+        }
+
+        if (!exchangeRates.hasOwnProperty(toCurrency)) {
+            alert("Invalid currency selected.");
+            return;
+        }
+
+        var convertedAmount = amount * exchangeRates[toCurrency];
+
+        document.getElementById("convertedAmount").textContent = convertedAmount.toFixed(2);
+    }
+
+    // Function to populate currency pairs in the dropdown
+    function populateCurrencyPairs() {
+        var currencyPairDropdown = $("#currencyPair");
+        currencyPairDropdown.empty(); // Clear existing options
+
+        $.each(currencyPairsList, function (currencyName, currencyCode) {
+            currencyPairDropdown.append($("<option></option>")
+                .attr("value", currencyCode)
+                .text(currencyName));
+        });
+    }
+
+    // Call the function to populate currency pairs on page load
+    $(document).ready(function () {
+        populateCurrencyPairs();
+		populateCurrencyPairsDropdown("graphCurrencyPair");
+    });
+	
+	$(document).ready(function () {
+    populateCurrencyPairs();
+});
+
+function populateCurrencyPairsDropdown(dropdownId) {
+    var currencyPairDropdown = $("#" + dropdownId);
+    currencyPairDropdown.empty(); // Clear existing options
+
+    $.each(currencyPairsList, function (currencyName, currencyCode) {
+        currencyPairDropdown.append($("<option></option>")
+            .attr("value", currencyCode)
+            .text(currencyName));
+    });
+}
+
+// Call the function to populate currency pairs on page load
+$(document).ready(function () {
+    populateCurrencyPairs();
+    populateCurrencyPairsDropdown("graphCurrencyPair"); // Populate graph section dropdown
+});
+	
+		  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    var btn = document.getElementById("goToTopBtn");
+
+    // Show or hide the button based on scroll position
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  }
+
+  function goToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  function plotGraph() {
+        // Get selected values
+        var selectedCurrency = $("#graphCurrencyPair").val();
+        var selectedChartType = $("#chartType").val();
+
+        // Remove other HTML Components as needed
+        $("#header").remove();
+        $("#navbar").remove();
+        $("#graph").remove();
+        $("#sept1").remove();
+        $("#sept3").remove();
+        $(".footer").remove();
+        $("#converter").remove();
+        // Make an AJAX request to fetch data for the selected currency and chart type
+        $.ajax({
+            url: 'generate_graph/', 
+            method: 'POST',
+            data: {
+                currency: selectedCurrency,
+                time_interval: selectedChartType,
+            },
+            success: function (response) {
+                //  Assuming the response contains the Plotly graph HTML
+                //  Replace the content of the chart-container with the new graph
+                $("#chart-container").html(response);
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

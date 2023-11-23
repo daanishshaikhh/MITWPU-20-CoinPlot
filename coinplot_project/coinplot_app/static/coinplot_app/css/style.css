@@ -1,0 +1,219 @@
+html {
+	font-family: 'Cabin', sans-serif;
+	font-size: 20px;
+}
+
+body 
+{
+    margin: 0;
+	padding: 0;
+	background-color: black;
+	color: black;
+}
+
+.logo img 
+{
+	width: 35px; 
+	margin-right: 10px;
+}
+	
+#sept1
+{
+	margin-left:20px;
+	margin-right:20px;
+	margin-bottom:40px;
+	border-color: green;
+    border-width: 1px;
+}
+
+#sept2
+{
+	
+	margin-right:20px;
+	border-color: white;
+    border-width: 2px;
+}
+
+.navbar{
+	background: black ; 
+	padding-top:30px;
+	padding-left:20px;
+	padding-bottom:20px;
+}
+
+.navdiv{
+	display: flex; 
+	align-items: center; 
+	justify-content: space-between;
+}
+
+.logo {
+	font-size: 35px; 
+	font-weight: 600; 
+	color: green;
+}
+
+li{
+	list-style: none; 
+	display: inline-block;
+	padding-right:20px;
+}
+
+li a{
+	text-decoration:none;
+	color: green; 
+	font-size: 18px; 
+	font-weight: bold; 
+	margin-right: 25px;
+}	
+	
+li:hover a {
+	text-decoration: underline;
+	color:white;
+}
+	
+.container 
+{
+	color:white;
+	background-color: #333;
+    border-radius: 10px;
+	margin: 20px;
+	padding-left:20px;
+	padding-bottom:30px;
+}
+
+#converter {
+	display : flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.graphcontainer 
+{
+	color:white;
+	background-color: #333;
+    border-radius: 10px;
+	margin: 20px;
+	padding-left:20px;
+	padding-bottom:30px;
+}
+		
+h2{
+	padding-bottom:10px;
+	padding-top:30px;
+}	
+
+label 
+{
+    display: block;
+    margin: 10px 0;
+    color: #bdc3c7;
+}
+
+select, input, button 
+{
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    background-color: #333;
+    color: #bdc3c7;
+}
+
+select 
+{
+    width: 200px;
+}
+
+button 
+{
+    background-color: green;
+    color: #fff;
+    border: none;
+	margin-left:20px;
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover 
+{
+    background-color: #45a049;
+}
+
+#convert
+{
+	margin-top:20px;
+	margin-left:-25px;
+}
+
+.dropdown-container 
+{
+	padding-top:20px;
+	align-items:center;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.plot-button-container 
+{
+	text-align: center;
+    margin-top: 10px;
+}
+
+#chart-container, #converter-container 
+{
+    margin-top: 20px;
+}
+
+#chart 
+{
+    width: 100%;
+}
+
+
+#sept3
+{
+	margin-left:20px;
+	margin-right:20px;
+	border-color: green;
+    border-width: 1px;
+	margin-top:100px;
+}
+
+
+ #goToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: green; 
+    color: #fff; 
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+#goToTopBtn:hover {
+    background-color: #45a049;
+}
+
+        h4 {
+            color: rgb(49, 169, 49); /* Set the text color to blue */
+        
+            padding: 1px; /* Add some padding for better visibility */
+        }
+  
+		h2 em {
+            color: rgb(231, 204, 204); /* Set the text color to green */
+        }
+		.graphcontainer {
+            margin: 0 auto;
+            text-align: center;
+			margin-bottom:5px;
+        }
