@@ -62,7 +62,7 @@ pip install pandas
 
 ```bash
 # Example installation steps
-git clone https://github.com/Arnavshah25/MITWPU-20-CoinPlot
+git clone https://github.com/daanishshaikhh/MITWPU-20-CoinPlot
 cd coinplot_project
 python manage.py runserver
 ```
